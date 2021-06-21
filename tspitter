@@ -1,0 +1,44 @@
+#!/bin/bash
+
+NONE=$(tput sgr0)
+BLACK=$(tput setaf 0)
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+LIME_YELLOW=$(tput setaf 190)
+POWDER_BLUE=$(tput setaf 153)
+BLUE=$(tput setaf 4)
+MAGENTA=$(tput setaf 5)
+CYAN=$(tput setaf 6)
+WHITE=$(tput setaf 7)
+BRIGHT=$(tput bold)
+BLINK=$(tput blink)
+REVERSE=$(tput smso)
+UNDERLINE=$(tput smul)
+DIM=$(tput dim)
+ITALIC=$(tput sitm)
+
+if [ -z $1 ]; then
+    echo -e "tspitter [${BRIGHT}SOURCE${NONE}] [${ITALIC}SOURCE NAME${NONE}] [${ITALIC}T LIMIT${NONE}] [${ITALIC}LIMIT ICON${NONE}] [${ITALIC}PREFIX${NONE}]"
+    exit 0
+fi
+
+TLIMIT="${3:-60}" 
+UNIT="${4:-"℃"}"
+LIMIT_ICON="${5:-"🔥"}"
+PREFIX="${6:-"🌡"}"
+
+let T=$(cat $1)/1000
+
+
+if [ $2 ]; then
+    TLABEL="$2: "
+fi
+
+if [ $T -gt $TLIMIT ]; 
+then
+    WARN="${LIMIT_ICON}${YELLOW}"
+fi
+
+
+printf  "%s%.2s%s\n" "$PREFIX$TLABEL$WARN" $(cat $1) "${NONE}${UNIT}" | xargs echo
