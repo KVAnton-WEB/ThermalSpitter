@@ -41,4 +41,4 @@ then
 fi
 
 
-printf  "%s%.2s%s\n" "$PREFIX$TLABEL$WARN" $(cat $1) "${NONE}${UNIT}" | xargs echo
+printf  "%s%.2s%s\n" "$PREFIX$TLABEL$WARN" $(cat $1) "${NONE}${UNIT}"
